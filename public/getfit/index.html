@@ -437,10 +437,10 @@
 
   <script>
     /**
-     * Paste your affiliate / offer URL here later.
+     * Paste your offer URL here later.
      * Leave empty to show an alert when the CTA is clicked.
      */
-    const AFFILIATE_URL = "";
+    const redirect_url = "";
 
     const answers = {};
     const screens = [...document.querySelectorAll(".screen")];
@@ -499,10 +499,10 @@
     }
 
     function openOffer() {
-      if (AFFILIATE_URL && AFFILIATE_URL.trim()) {
-        window.location.href = AFFILIATE_URL;
+      if (redirect_url && redirect_url.trim()) {
+        window.location.href = redirect_url;
       } else {
-        alert("Affiliate link not set yet. Add AFFILIATE_URL in getfit/index.html.");
+        alert("Redirect URL not set yet. Add redirect_url in getfit/index.html.");
       }
     }
 
