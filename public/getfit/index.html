@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>GetFit Quiz | 1min.to</title>
+  <meta name="description" content="A 1-minute quiz to match your weight goals with a simple plan that fits your life.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f3f6f4;
+      --bg-accent: #e4efe8;
+      --ink: #14201a;
+      --muted: #5c6b62;
+      --line: #d5e0d9;
+      --brand: #1f6b4a;
+      --brand-deep: #0f3d2c;
+      --brand-soft: #d8eee3;
+      --warm: #f0a35a;
+      --surface: #ffffff;
+      --max: 420px;
+      --safe-b: env(safe-area-inset-bottom, 0px);
+      --safe-t: env(safe-area-inset-top, 0px);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: Outfit, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 420px at 50% -10%, var(--bg-accent), transparent 60%),
+        var(--bg);
+      line-height: 1.45;
+    }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    a { color: var(--brand); }
+
+    .app {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      min-height: 100dvh;
+      padding: calc(0.85rem + var(--safe-t)) 1rem calc(1.25rem + var(--safe-b));
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      font-size: 1.15rem;
+      color: var(--brand-deep);
+      text-decoration: none;
+    }
+    .brand span { color: var(--brand); }
+    .skip {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      padding: 0.25rem 0;
+    }
+
+    .progress {
+      height: 4px;
+      background: var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .progress.on { opacity: 1; }
+    .progress > i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--brand), #2f9a68);
+      border-radius: inherit;
+      transition: width 0.35s ease;
+    }
+
+    .screen {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      animation: rise 0.28s ease;
+    }
+    .screen.active { display: flex; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    h1, h2 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin: 0 0 0.65rem;
+    }
+    h1 { font-size: clamp(1.85rem, 7vw, 2.35rem); }
+    h2 { font-size: clamp(1.45rem, 5.8vw, 1.85rem); }
+    .sub {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .options {
+      display: grid;
+      gap: 0.65rem;
+    }
+    .opt {
+      width: 100%;
+      text-align: left;
+      border: 1.5px solid var(--line);
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      font-weight: 600;
+      transition: border-color 0.15s, background 0.15s, transform 0.12s;
+    }
+    .opt:hover { border-color: #9fbfb0; }
+    .opt:active { transform: scale(0.99); }
+    .opt.selected {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+    }
+    .opt.multi.selected::after {
+      content: "✓";
+      float: right;
+      color: var(--brand);
+      font-weight: 800;
+    }
+
+    .emoji {
+      display: inline-block;
+      width: 1.5rem;
+      margin-right: 0.35rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      font-weight: 700;
+      background: var(--brand);
+      color: #fff;
+      margin-top: 1rem;
+      transition: background 0.15s, opacity 0.15s;
+    }
+    .btn:hover { background: var(--brand-deep); }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .btn.secondary {
+      background: transparent;
+      color: var(--brand-deep);
+      border: 1.5px solid var(--line);
+    }
+
+    .legal {
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .bridge {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.25rem 1.1rem;
+      margin-top: 0.5rem;
+    }
+    .bridge .stat {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: -0.03em;
+      margin: 0 0 0.35rem;
+    }
+
+    .loader {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 1rem;
+      padding: 2rem 0;
+    }
+    .spinner {
+      width: 42px;
+      height: 42px;
+      border: 3px solid var(--line);
+      border-top-color: var(--brand);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .checks {
+      list-style: none;
+      margin: 0.5rem 0 0;
+      padding: 0;
+      width: 100%;
+      display: grid;
+      gap: 0.55rem;
+      text-align: left;
+    }
+    .checks li {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.75rem 0.9rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+      opacity: 0.35;
+      transform: translateY(4px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .checks li.on {
+      opacity: 1;
+      transform: none;
+    }
+    .checks li::before {
+      content: "✓";
+      color: var(--brand);
+      font-weight: 800;
+      margin-right: 0.45rem;
+    }
+
+    .summary {
+      display: grid;
+      gap: 0.65rem;
+      margin: 0.5rem 0 0.25rem;
+    }
+    .summary div {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.85rem 0.95rem;
+    }
+    .summary strong {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+      font-weight: 700;
+    }
+
+    .cta-art {
+      font-size: 2.4rem;
+      letter-spacing: 0.15rem;
+      text-align: center;
+      margin: 0.75rem 0 1rem;
+    }
+
+    .foot-note {
+      margin-top: auto;
+      padding-top: 1.25rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    @media (min-width: 720px) {
+      :root { --max: 480px; }
+      body {
+        background:
+          radial-gradient(1100px 520px at 50% -15%, var(--bg-accent), transparent 55%),
+          linear-gradient(180deg, #eef4f0 0%, var(--bg) 40%);
+      }
+      .app { padding-top: 2rem; }
+      .opt { padding: 1.05rem 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="top">
+      <a class="brand" href="/">1min<span>.to</span></a>
+      <button type="button" class="skip" id="skipBtn">Skip quiz</button>
+    </div>
+    <div class="progress" id="progress"><i id="progressBar"></i></div>
+
+    <section class="screen active" data-screen="gender">
+      <h1>Let’s personalize your plan</h1>
+      <p class="sub">1 minute. A few questions. A clearer path for your weight goals.</p>
+      <div class="options" data-key="gender" data-auto="1">
+        <button type="button" class="opt" data-value="Female">Female</button>
+        <button type="button" class="opt" data-value="Male">Male</button>
+        <button type="button" class="opt" data-value="Prefer not to say">Prefer not to say</button>
+      </div>
+      <p class="legal">By continuing, you agree to our terms and privacy policy.</p>
+    </section>
+
+    <section class="screen" data-screen="age">
+      <h2>What age range are you in?</h2>
+      <p class="sub">Helps us match the right pace for your body.</p>
+      <div class="options" data-key="age" data-auto="1">
+        <button type="button" class="opt" data-value="18-29">18 – 29</button>
+        <button type="button" class="opt" data-value="30-39">30 – 39</button>
+        <button type="button" class="opt" data-value="40-49">40 – 49</button>
+        <button type="button" class="opt" data-value="50+">50+</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="goal">
+      <h2>What’s your main goal?</h2>
+      <p class="sub">Choose as many as you’d like.</p>
+      <div class="options" data-key="goal" data-multi="1">
+        <button type="button" class="opt multi" data-value="Lose weight steadily">Lose weight steadily</button>
+        <button type="button" class="opt multi" data-value="Keep weight off long-term">Keep weight off long-term</button>
+        <button type="button" class="opt multi" data-value="Feel lighter and more energetic">Feel lighter and more energetic</button>
+        <button type="button" class="opt multi" data-value="Fit clothes I love again">Fit clothes I love again</button>
+        <button type="button" class="opt multi" data-value="All of the above">All of the above</button>
+      </div>
+      <button type="button" class="btn" data-next disabled>Continue</button>
+    </section>
+
+    <section class="screen" data-screen="bridge">
+      <div class="bridge">
+        <p class="stat">10,000+</p>
+        <h2>You’re in good company</h2>
+        <p class="sub" style="margin-bottom:0">People with similar goals use a simple daily plan to reset habits, quiet cravings, and finally see the scale move — without another extreme diet.</p>
+      </div>
+      <button type="button" class="btn" data-next>Continue</button>
+    </section>
+
+    <section class="screen" data-screen="amount">
+      <h2>How much weight do you want to lose?</h2>
+      <div class="options" data-key="amount" data-auto="1">
+        <button type="button" class="opt" data-value="Under 15 lbs">Under 15 lbs</button>
+        <button type="button" class="opt" data-value="15–30 lbs">15 – 30 lbs</button>
+        <button type="button" class="opt" data-value="30–50 lbs">30 – 50 lbs</button>
+        <button type="button" class="opt" data-value="50+ lbs">50+ lbs</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="impact">
+      <h2>How has your weight affected you?</h2>
+      <div class="options" data-key="impact" data-auto="1">
+        <button type="button" class="opt" data-value="Lower confidence"><span class="emoji">😕</span>It has lowered my confidence</button>
+        <button type="button" class="opt" data-value="Avoid photos"><span class="emoji">📸</span>I avoid photos or social plans</button>
+        <button type="button" class="opt" data-value="Low energy"><span class="emoji">😓</span>I feel tired and low-energy</button>
+        <button type="button" class="opt" data-value="Not much"><span class="emoji">🙂</span>It hasn’t affected me much</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="tried">
+      <h2>What have you already tried?</h2>
+      <p class="sub">Choose as many as you’d like.</p>
+      <div class="options" data-key="tried" data-multi="1">
+        <button type="button" class="opt multi" data-value="Calorie counting">Calorie counting</button>
+        <button type="button" class="opt multi" data-value="Gym / workouts">Gym / workouts</button>
+        <button type="button" class="opt multi" data-value="Meal plans / coaching">Meal plans / coaching</button>
+        <button type="button" class="opt multi" data-value="Supplements">Supplements</button>
+        <button type="button" class="opt multi" data-value="Nothing yet">Nothing yet</button>
+      </div>
+      <button type="button" class="btn" data-next disabled>Continue</button>
+    </section>
+
+    <section class="screen" data-screen="stuck">
+      <h2>What usually gets in the way?</h2>
+      <div class="options" data-key="stuck" data-auto="1">
+        <button type="button" class="opt" data-value="Cravings">Cravings that won’t quit</button>
+        <button type="button" class="opt" data-value="Busy schedule">A busy schedule</button>
+        <button type="button" class="opt" data-value="Yo-yo results">Results that don’t stick</button>
+        <button type="button" class="opt" data-value="Motivation">Motivation fading after a few weeks</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="timeline">
+      <h2>When do you want to see real change?</h2>
+      <div class="options" data-key="timeline" data-auto="1">
+        <button type="button" class="opt" data-value="ASAP">As soon as possible</button>
+        <button type="button" class="opt" data-value="1-2 months">In the next 1–2 months</button>
+        <button type="button" class="opt" data-value="Steady">Steady progress over time</button>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="analyzing">
+      <div class="loader">
+        <div class="spinner" aria-hidden="true"></div>
+        <h2>Creating your analysis…</h2>
+        <ul class="checks" id="analyzeChecks">
+          <li>Matching your goal profile…</li>
+          <li>Looking at habit blockers…</li>
+          <li>Building a simple daily plan…</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="summary">
+      <h2>Summary of your weight profile</h2>
+      <div class="summary" id="summaryCards"></div>
+      <button type="button" class="btn" data-next>Continue</button>
+    </section>
+
+    <section class="screen" data-screen="offer">
+      <h2>Ready for a plan that actually fits your life?</h2>
+      <p class="sub">Based on your answers, we’ll show you a straightforward next step built around real weight loss — not another extreme reset.</p>
+      <div class="cta-art" aria-hidden="true">🧍 → ✨</div>
+      <button type="button" class="btn" id="offerBtn">Yes, show my plan</button>
+      <button type="button" class="btn secondary" id="offerSkip">Skip for now</button>
+      <p class="foot-note">1min.to · GetFit</p>
+    </section>
+  </div>
+
+  <script>
+    /**
+     * Paste your affiliate / offer URL here later.
+     * Leave empty to show an alert when the CTA is clicked.
+     */
+    const AFFILIATE_URL = "";
+
+    const answers = {};
+    const screens = [...document.querySelectorAll(".screen")];
+    const progress = document.getElementById("progress");
+    const progressBar = document.getElementById("progressBar");
+    const questionScreens = screens.filter((s) => !["analyzing", "summary", "offer"].includes(s.dataset.screen));
+
+    function goTo(name) {
+      screens.forEach((s) => s.classList.toggle("active", s.dataset.screen === name));
+      const idx = questionScreens.findIndex((s) => s.dataset.screen === name);
+      if (idx >= 0) {
+        progress.classList.add("on");
+        progressBar.style.width = ((idx + 1) / questionScreens.length) * 100 + "%";
+      } else {
+        progress.classList.toggle("on", name === "summary");
+        if (name === "summary") progressBar.style.width = "100%";
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function nextFrom(el) {
+      const current = el.closest(".screen");
+      const i = screens.indexOf(current);
+      const next = screens[i + 1];
+      if (!next) return;
+      if (next.dataset.screen === "analyzing") {
+        goTo("analyzing");
+        runAnalysis();
+      } else {
+        goTo(next.dataset.screen);
+      }
+    }
+
+    function monthLabel() {
+      const d = new Date();
+      d.setMonth(d.getMonth() + 2);
+      return d.toLocaleString("en-US", { month: "long" });
+    }
+
+    function runAnalysis() {
+      const items = [...document.querySelectorAll("#analyzeChecks li")];
+      items.forEach((li) => li.classList.remove("on"));
+      items.forEach((li, i) => {
+        setTimeout(() => li.classList.add("on"), 450 + i * 550);
+      });
+      setTimeout(() => {
+        const cards = document.getElementById("summaryCards");
+        cards.innerHTML = `
+          <div><strong>Goal</strong>${[].concat(answers.goal || []).join(", ") || "Steady weight loss"}</div>
+          <div><strong>Target</strong>${answers.amount || "Personalized"}</div>
+          <div><strong>Main blocker</strong>${answers.stuck || "Habits"}</div>
+          <div><strong>Expected visible progress</strong>By ${monthLabel()}</div>
+        `;
+        goTo("summary");
+      }, 2200);
+    }
+
+    function openOffer() {
+      if (AFFILIATE_URL && AFFILIATE_URL.trim()) {
+        window.location.href = AFFILIATE_URL;
+      } else {
+        alert("Affiliate link not set yet. Add AFFILIATE_URL in getfit/index.html.");
+      }
+    }
+
+    document.querySelectorAll(".options").forEach((group) => {
+      const key = group.dataset.key;
+      const multi = group.dataset.multi === "1";
+      const auto = group.dataset.auto === "1";
+      const continueBtn = group.parentElement.querySelector("[data-next]");
+
+      group.querySelectorAll(".opt").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (multi) {
+            if (btn.dataset.value === "All of the above" || btn.dataset.value === "Nothing yet") {
+              group.querySelectorAll(".opt").forEach((b) => b.classList.remove("selected"));
+              btn.classList.add("selected");
+            } else {
+              const exclusive = group.querySelector('[data-value="All of the above"], [data-value="Nothing yet"]');
+              if (exclusive) exclusive.classList.remove("selected");
+              btn.classList.toggle("selected");
+            }
+            const selected = [...group.querySelectorAll(".opt.selected")].map((b) => b.dataset.value);
+            answers[key] = selected;
+            if (continueBtn) continueBtn.disabled = selected.length === 0;
+          } else {
+            group.querySelectorAll(".opt").forEach((b) => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            answers[key] = btn.dataset.value;
+            if (auto) setTimeout(() => nextFrom(btn), 180);
+          }
+        });
+      });
+    });
+
+    document.querySelectorAll("[data-next]").forEach((btn) => {
+      btn.addEventListener("click", () => nextFrom(btn));
+    });
+
+    document.getElementById("skipBtn").addEventListener("click", openOffer);
+    document.getElementById("offerBtn").addEventListener("click", openOffer);
+    document.getElementById("offerSkip").addEventListener("click", openOffer);
+  </script>
+</body>
+</html>
