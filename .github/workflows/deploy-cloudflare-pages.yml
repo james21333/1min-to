@@ -1,8 +1,8 @@
 name: Deploy to Cloudflare Pages
 
+# Primary deploy path is Cloudflare Pages Git integration (push to main).
+# This workflow is a manual fallback only.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
