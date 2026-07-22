@@ -415,6 +415,18 @@
       <button type="button" class="btn" data-next>Continue</button>
     </section>
 
+    <section class="screen" data-screen="matching">
+      <div class="loader">
+        <div class="spinner" aria-hidden="true"></div>
+        <h2>Matching you to the best program…</h2>
+        <ul class="checks" id="matchChecks">
+          <li>Reviewing your get-fit goals…</li>
+          <li>Comparing program fits…</li>
+          <li>Selecting your best match…</li>
+        </ul>
+      </div>
+    </section>
+
     <section class="screen" data-screen="offer">
       <h2>Ready for a plan that actually fits your life?</h2>
       <p class="sub">Based on your answers, we’ll show you a straightforward next step built around getting fit — not another extreme reset.</p>
@@ -436,7 +448,7 @@
     const screens = [...document.querySelectorAll(".screen")];
     const progress = document.getElementById("progress");
     const progressBar = document.getElementById("progressBar");
-    const questionScreens = screens.filter((s) => !["analyzing", "summary", "offer"].includes(s.dataset.screen));
+    const questionScreens = screens.filter((s) => !["analyzing", "summary", "matching", "offer"].includes(s.dataset.screen));
 
     function goTo(name) {
       screens.forEach((s) => s.classList.toggle("active", s.dataset.screen === name));
@@ -459,6 +471,9 @@
       if (next.dataset.screen === "analyzing") {
         goTo("analyzing");
         runAnalysis();
+      } else if (next.dataset.screen === "matching") {
+        goTo("matching");
+        runMatching();
       } else {
         goTo(next.dataset.screen);
       }
@@ -470,13 +485,17 @@
       return d.toLocaleString("en-US", { month: "long" });
     }
 
-    function runAnalysis() {
-      const items = [...document.querySelectorAll("#analyzeChecks li")];
+    function runChecklist(selector, onDone, delay) {
+      const items = [...document.querySelectorAll(selector)];
       items.forEach((li) => li.classList.remove("on"));
       items.forEach((li, i) => {
         setTimeout(() => li.classList.add("on"), 450 + i * 550);
       });
-      setTimeout(() => {
+      setTimeout(onDone, delay || 2200);
+    }
+
+    function runAnalysis() {
+      runChecklist("#analyzeChecks li", () => {
         const cards = document.getElementById("summaryCards");
         cards.innerHTML = `
           <div><strong>Goal</strong>${[].concat(answers.goal || []).join(", ") || "Getting fit steadily"}</div>
@@ -485,7 +504,11 @@
           <div><strong>Expected visible progress</strong>By ${monthLabel()}</div>
         `;
         goTo("summary");
-      }, 2200);
+      });
+    }
+
+    function runMatching() {
+      runChecklist("#matchChecks li", () => goTo("offer"));
     }
 
     function openOffer() {
