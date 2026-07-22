@@ -1,0 +1,33 @@
+---
+description: GetFit quiz is multi-path — always mass-edit via shared files, never one path alone
+alwaysApply: true
+---
+
+# GetFit quiz — mass edit (1min.to)
+
+The GetFit quiz is **one shared implementation** cloned to many URL paths. Do **not** edit a single path’s `index.html` for copy/logic/style changes.
+
+## Source of truth (edit these)
+
+- `public/shared/getfit-quiz.js` — quiz markup + behavior + `redirect_url`
+- `public/shared/getfit-quiz.css` — styles
+
+Then commit and push `main` (Cloudflare Pages auto-deploys).
+
+## Path shells (do not hand-edit content here)
+
+Thin identical loaders only. Listed in `scripts/getfit-paths.txt`:
+
+`getfit`, `getstarted`, `signup`, `startnow`, `getyourplan`, `findyourfit`, `getresults`, `takethequiz`, `seeoptions`, `findout`
+
+Each is `public/<slug>/index.html` → loads `/shared/getfit-quiz.css` + `/shared/getfit-quiz.js`.
+
+## Add a new path
+
+1. Append slug to `scripts/getfit-paths.txt`
+2. Run `./scripts/sync-getfit-paths.sh`
+3. Commit + push
+
+## Local clone
+
+`/Users/josh/Desktop/1min-to` · GitHub `james21333/1min-to` · Pages project `onemin-to`

@@ -1,4 +1,9 @@
-/* GetFit quiz — shared by all path aliases. Edit this file to update every URL. */
+/* =============================================================================
+ * GetFit quiz — SHARED by all path aliases on 1min.to
+ * Edit THIS file (and getfit-quiz.css) to mass-update every URL at once.
+ * Paths: see scripts/getfit-paths.txt  |  shells: ./scripts/sync-getfit-paths.sh
+ * Do NOT edit public/<slug>/index.html for quiz content.
+ * ============================================================================= */
 (function () {
   const root = document.getElementById("getfit-root");
   if (!root) return;
