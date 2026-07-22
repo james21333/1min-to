@@ -291,6 +291,36 @@
       color: var(--muted);
     }
 
+    .found-match { gap: 1.25rem; }
+    .found-title {
+      font-size: clamp(2.4rem, 9vw, 3.25rem);
+      margin: 0;
+      line-height: 1.05;
+    }
+    .found-card {
+      width: 100%;
+      text-align: center;
+      margin-top: 0.25rem;
+      padding: 1.5rem 1.15rem;
+    }
+    .found-brand {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(2.1rem, 8vw, 2.85rem);
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: -0.03em;
+      margin: 0 0 0.45rem;
+      line-height: 1.05;
+      word-break: break-word;
+    }
+    .found-offer {
+      margin: 0;
+      font-size: clamp(1.25rem, 4.8vw, 1.55rem);
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .found-redirect { margin-top: 0.35rem; }
+
     @media (min-width: 720px) {
       :root { --max: 480px; }
       body {
@@ -437,13 +467,13 @@
     </section>
 
     <section class="screen" data-screen="found">
-      <div class="loader">
-        <h2>Found a Match!</h2>
-        <div class="bridge" style="width:100%; text-align:left; margin-top:0.25rem;">
-          <p class="stat" style="font-size:1.55rem;">Factor75.com</p>
-          <p class="sub" style="margin:0; font-size:1.05rem; color:var(--ink); font-weight:600;">50% off First Box</p>
+      <div class="loader found-match">
+        <h2 class="found-title">Found a Match!</h2>
+        <div class="bridge found-card">
+          <p class="found-brand">Factor75.com</p>
+          <p class="found-offer">50% off First Box</p>
         </div>
-        <p class="sub" style="margin-top:1rem;">Taking you there now…</p>
+        <p class="sub found-redirect">Taking you there now…</p>
       </div>
     </section>
   </div>
