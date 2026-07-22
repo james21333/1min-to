@@ -32,3 +32,22 @@ public/           # Static files served at 1min.to
   index.html
   _headers
 ```
+
+## GetFit quiz (multi-path)
+
+Same quiz is served at all of these URLs:
+
+- https://1min.to/getfit/
+- https://1min.to/getstarted/
+- https://1min.to/signup/
+- https://1min.to/startnow/
+- https://1min.to/getyourplan/
+- https://1min.to/findyourfit/
+- https://1min.to/getresults/
+- https://1min.to/takethequiz/
+- https://1min.to/seeoptions/
+- https://1min.to/findout/
+
+**Mass edit (one place):** edit `public/shared/getfit-quiz.js` and/or `public/shared/getfit-quiz.css`, then push.
+
+**Add another path:** add the slug to `scripts/getfit-paths.txt`, run `./scripts/sync-getfit-paths.sh`, commit, push.
