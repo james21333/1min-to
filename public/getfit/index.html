@@ -415,6 +415,15 @@
       <button type="button" class="btn" data-next>Continue</button>
     </section>
 
+    <section class="screen" data-screen="offer">
+      <h2>Ready for a plan that actually fits your life?</h2>
+      <p class="sub">Based on your answers, we’ll show you a straightforward next step built around getting fit — not another extreme reset.</p>
+      <div class="cta-art" aria-hidden="true">🧍 → ✨</div>
+      <button type="button" class="btn" id="offerBtn">Yes, show my plan</button>
+      <button type="button" class="btn secondary" id="offerSkip">Skip for now</button>
+      <p class="foot-note">1min.to · GetFit</p>
+    </section>
+
     <section class="screen" data-screen="matching">
       <div class="loader">
         <div class="spinner" aria-hidden="true"></div>
@@ -427,28 +436,26 @@
       </div>
     </section>
 
-    <section class="screen" data-screen="offer">
-      <h2>Ready for a plan that actually fits your life?</h2>
-      <p class="sub">Based on your answers, we’ll show you a straightforward next step built around getting fit — not another extreme reset.</p>
-      <div class="cta-art" aria-hidden="true">🧍 → ✨</div>
-      <button type="button" class="btn" id="offerBtn">Yes, show my plan</button>
-      <button type="button" class="btn secondary" id="offerSkip">Skip for now</button>
-      <p class="foot-note">1min.to · GetFit</p>
+    <section class="screen" data-screen="found">
+      <div class="loader">
+        <h2>Found a Match!</h2>
+        <div class="bridge" style="width:100%; text-align:left; margin-top:0.25rem;">
+          <p class="stat" style="font-size:1.55rem;">Factor75.com</p>
+          <p class="sub" style="margin:0; font-size:1.05rem; color:var(--ink); font-weight:600;">50% off First Box</p>
+        </div>
+        <p class="sub" style="margin-top:1rem;">Taking you there now…</p>
+      </div>
     </section>
   </div>
 
   <script>
-    /**
-     * Paste your offer URL here later.
-     * Leave empty to show an alert when the CTA is clicked.
-     */
-    const redirect_url = "";
+    const redirect_url = "https://factor75.com";
 
     const answers = {};
     const screens = [...document.querySelectorAll(".screen")];
     const progress = document.getElementById("progress");
     const progressBar = document.getElementById("progressBar");
-    const questionScreens = screens.filter((s) => !["analyzing", "summary", "matching", "offer"].includes(s.dataset.screen));
+    const questionScreens = screens.filter((s) => !["analyzing", "summary", "offer", "matching", "found"].includes(s.dataset.screen));
 
     function goTo(name) {
       screens.forEach((s) => s.classList.toggle("active", s.dataset.screen === name));
@@ -457,8 +464,9 @@
         progress.classList.add("on");
         progressBar.style.width = ((idx + 1) / questionScreens.length) * 100 + "%";
       } else {
-        progress.classList.toggle("on", name === "summary");
-        if (name === "summary") progressBar.style.width = "100%";
+        progress.classList.toggle("on", name === "summary" || name === "offer");
+        if (name === "summary" || name === "offer") progressBar.style.width = "100%";
+        if (name === "matching" || name === "found") progress.classList.remove("on");
       }
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -472,8 +480,8 @@
         goTo("analyzing");
         runAnalysis();
       } else if (next.dataset.screen === "matching") {
-        goTo("matching");
-        runMatching();
+        // Offer CTAs handle matching; summary continues to offer.
+        goTo("offer");
       } else {
         goTo(next.dataset.screen);
       }
@@ -508,15 +516,17 @@
     }
 
     function runMatching() {
-      runChecklist("#matchChecks li", () => goTo("offer"));
+      goTo("matching");
+      runChecklist("#matchChecks li", () => {
+        goTo("found");
+        setTimeout(() => {
+          window.location.href = redirect_url;
+        }, 1800);
+      });
     }
 
     function openOffer() {
-      if (redirect_url && redirect_url.trim()) {
-        window.location.href = redirect_url;
-      } else {
-        alert("Redirect URL not set yet. Add redirect_url in getfit/index.html.");
-      }
+      runMatching();
     }
 
     document.querySelectorAll(".options").forEach((group) => {
