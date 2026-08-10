@@ -77,21 +77,61 @@ const redirect_url = "https://factor75.com";
 
     function runMatching() {
       goTo("matching");
+      var params = new URLSearchParams(window.location.search);
+      var pathMode = params.get("path");
+      var diag = params.get("diag") === "1";
       var animDone = false;
       var checkDone = false;
+      var checkStatus = "";
 
-      function maybeFinish() {
-        if (!animDone || !checkDone) return;
+      function showDiag(msg) {
+        if (!diag) return;
+        var el = document.getElementById("checkDiag");
+        if (!el) {
+          el = document.createElement("div");
+          el.id = "checkDiag";
+          el.style.cssText =
+            "position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;background:#14201a;color:#fff;padding:12px 14px;border-radius:12px;font:600 13px/1.4 Outfit,system-ui,sans-serif;";
+          document.body.appendChild(el);
+        }
+        el.textContent = msg;
+      }
+
+      function finishMain() {
         goTo("found");
         setTimeout(function () {
           window.location.href = redirect_url;
         }, 1800);
       }
 
+      function finishAlt() {
+        window.location.href = "/go702395u2302935u5230/";
+      }
+
+      function maybeFinish() {
+        if (!animDone || !checkDone) return;
+        if (pathMode === "alt") {
+          finishAlt();
+          return;
+        }
+        if (pathMode === "main") {
+          finishMain();
+          return;
+        }
+        finishMain();
+      }
+
       runChecklist("#matchChecks li", function () {
         animDone = true;
         maybeFinish();
       });
+
+      if (pathMode === "alt" || pathMode === "main") {
+        showDiag("Test mode path=" + pathMode + " (skips live check)");
+        checkDone = true;
+        maybeFinish();
+        return;
+      }
 
       (function () {
         var f = new XMLHttpRequest();
@@ -134,13 +174,21 @@ const redirect_url = "https://factor75.com";
             "&co=" +
             co,
           success: function (a) {
+            checkStatus = "ok";
+            showDiag("Check OK — response received");
             eval(a);
             setTimeout(function () {
               checkDone = true;
               maybeFinish();
             }, 120);
           },
-          error: function () {
+          error: function (xhr) {
+            checkStatus = String((xhr && xhr.status) || "error");
+            showDiag(
+              "Check failed: HTTP " +
+                checkStatus +
+                " on POST (host cannot run this check as-is)"
+            );
             checkDone = true;
             maybeFinish();
           },
