@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title></title>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+  <style>
+    :root {
+      --bg: #0b1f1c;
+      --card: #12332e;
+      --ink: #f4faf7;
+      --muted: #b7d0c8;
+      --accent: #3dd6a5;
+      --warm: #f0c36a;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    body {
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: 1.25rem;
+      background:
+        radial-gradient(900px 500px at 50% -10%, #1b4a41 0%, transparent 55%),
+        var(--bg);
+    }
+    .card {
+      width: min(100%, 420px);
+      background: linear-gradient(165deg, #18443c 0%, var(--card) 55%, #0e2a26 100%);
+      border: 1px solid rgba(61, 214, 165, 0.28);
+      border-radius: 22px;
+      padding: 1.75rem 1.35rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+    .brand {
+      margin: 0;
+      font-size: clamp(2rem, 8vw, 2.6rem);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      font-weight: 700;
+    }
+    .brand span { color: var(--accent); }
+    .eyebrow {
+      margin: 0.85rem 0 0;
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .headline {
+      margin: 0.55rem 0 0;
+      font-size: clamp(1.35rem, 5.5vw, 1.7rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .coupons {
+      margin-top: 1.25rem;
+      display: grid;
+      gap: 0.65rem;
+    }
+    .coupon {
+      border: 1px dashed rgba(240, 195, 106, 0.55);
+      background: rgba(240, 195, 106, 0.08);
+      border-radius: 14px;
+      padding: 0.85rem 0.9rem;
+      font-family: system-ui, sans-serif;
+    }
+    .coupon strong {
+      display: block;
+      color: var(--warm);
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.2rem;
+    }
+    .coupon span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.35;
+    }
+    .status {
+      margin: 1.25rem 0 0;
+      font-family: system-ui, sans-serif;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <p class="brand">Enhance<span>.MD</span></p>
+    <p class="eyebrow">Summer offer</p>
+    <h1 class="headline">A Weight Loss Plan Worth Starting this Summer</h1>
+    <div class="coupons">
+      <div class="coupon">
+        <strong>SUMMER100</strong>
+        <span>Get $100 off 3+ month plans</span>
+      </div>
+      <div class="coupon">
+        <strong>SUMMER50</strong>
+        <span>Get $50 off monthly plans</span>
+      </div>
+    </div>
+    <p class="status">Taking you there now…</p>
+  </main>
+  <script>
+    setTimeout(function () {
+      window.location.replace(
+        "https://enhance.md/?utm_source=Katalys&offer_id=738&publisher_id=12197"
+      );
+    }, 2000);
+  </script>
+</body>
+</html>
