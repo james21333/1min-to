@@ -3,46 +3,263 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>1min.to</title>
-  <meta name="description" content="1min.to">
+  <title>1min.to — One link for everything you share</title>
+  <meta name="description" content="1min.to helps creators, small businesses, and everyday people share everything they do with one simple link in bio.">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
-  <style>
-    :root { color-scheme: light; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-      background:
-        radial-gradient(1200px 600px at 10% -10%, #ffe7c2 0%, transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, #d9f1ff 0%, transparent 50%),
-        #f7f4ef;
-      color: #1c1916;
-    }
-    main { text-align: center; padding: 2rem 1.25rem; max-width: 36rem; }
-    h1 {
-      margin: 0;
-      font-size: clamp(2.75rem, 8vw, 4.5rem);
-      letter-spacing: -0.04em;
-      line-height: 0.95;
-    }
-    p { margin: 1rem 0 0; font-size: 1.05rem; opacity: 0.8; }
-    .note {
-      margin-top: 1.75rem;
-      font-size: 0.92rem;
-      opacity: 0.65;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/home.css">
   <script src="/shared/analytics.js"></script>
 </head>
 <body>
+  <header class="site-nav" id="top">
+    <div class="container nav-inner">
+      <a class="logo" href="#top">1min<span>.to</span></a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#stories">Stories</a>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <h1>1min.to</h1>
-    <p>GitHub → Cloudflare Pages. Push to <code>main</code> deploys here.</p>
-    <p class="note">Project scaffold is live. Replace this page when you are ready.</p>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Link in bio, simplified</div>
+          <h1>Everything you share.<br>One simple link.</h1>
+          <p class="hero-lead">
+            1min.to brings your content, shop, socials, and contact info together in a clean page your audience can open in seconds — from Instagram, TikTok, email, or anywhere else.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#features">See how it works</a>
+            <a class="btn btn-ghost" href="#stories">Creator stories</a>
+          </div>
+          <div class="hero-proof">
+            <div class="avatar-stack" aria-hidden="true">
+              <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Maya&amp;backgroundColor=b6e3f4" alt="">
+              <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Jordan&amp;backgroundColor=c0aede" alt="">
+              <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Sam&amp;backgroundColor=ffd5dc" alt="">
+              <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Riley&amp;backgroundColor=d1d4f9" alt="">
+            </div>
+            <span>Trusted by <strong>100,000+</strong> creators and small teams</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-blob" aria-hidden="true"></div>
+          <div class="float-card clicks" aria-hidden="true">
+            <strong>2.4M</strong>
+            clicks this month
+          </div>
+          <div class="phone" role="img" aria-label="Example 1min.to profile on a phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <img class="phone-avatar" src="https://api.dicebear.com/9.x/adventurer/svg?seed=StudioNova&amp;backgroundColor=ffdfbf" alt="">
+              <p class="phone-name">Studio Nova</p>
+              <p class="phone-bio">Design tips · free templates · shop</p>
+              <div class="phone-links">
+                <div class="phone-link accent">Latest YouTube video</div>
+                <div class="phone-link">Shop presets</div>
+                <div class="phone-link">Newsletter</div>
+                <div class="phone-link">Book a call</div>
+              </div>
+            </div>
+          </div>
+          <div class="float-card creators" aria-hidden="true">
+            <strong>100K+</strong>
+            active pages
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Platform stats">
+      <div class="container stats-grid">
+        <div class="stat">
+          <div class="stat-value">100K+</div>
+          <div class="stat-label">Creators and small businesses</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">2.4M</div>
+          <div class="stat-label">Link clicks every month</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">120+</div>
+          <div class="stat-label">Countries reached</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>One link. Endless possibilities.</h2>
+          <p>Whether you teach, sell, stream, or share — 1min.to keeps your audience one tap away from what matters most.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <img src="https://images.unsplash.com/photo-1611162617474-5b21eee979e8?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Person browsing social apps on a phone" width="800" height="600" loading="lazy">
+            <div class="feature-body">
+              <h3>Share everywhere</h3>
+              <p>Drop one link in your bio, stories, email signature, or QR code — and send people to everything you publish.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <img src="https://images.unsplash.com/photo-1556745753-b290d1ef256f?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Small business owner at a counter with a tablet" width="800" height="600" loading="lazy">
+            <div class="feature-body">
+              <h3>Sell and grow</h3>
+              <p>Highlight products, bookings, tips, and lead magnets without rebuilding your site every time something new launches.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Team collaborating around a laptop" width="800" height="600" loading="lazy">
+            <div class="feature-body">
+              <h3>Look polished instantly</h3>
+              <p>Pick a look that fits your brand, add your links, and publish a page that feels professional on every device.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div class="split-image">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Creator working on a laptop with colorful notes nearby" width="900" height="675" loading="lazy">
+        </div>
+        <div class="split-copy">
+          <h2>Built for creators who move fast</h2>
+          <p>Your audience should never hunt through five apps to find your latest drop. 1min.to puts your most important links front and center — updated in minutes, not hours.</p>
+          <ul class="checklist">
+            <li>Mobile-first pages that load quickly on any network</li>
+            <li>Clean layouts that keep attention on your offers</li>
+            <li>Simple analytics so you know what gets clicked</li>
+            <li>Flexible blocks for video, shop, email, and more</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split reverse">
+        <div class="split-image">
+          <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Colorful illustration-style workspace with art supplies" width="900" height="675" loading="lazy">
+        </div>
+        <div class="split-copy">
+          <h2>Made for real people, not just influencers</h2>
+          <p>Coaches, musicians, local shops, podcasters, and side hustlers use 1min.to to look credible online without hiring a designer or learning code.</p>
+          <ul class="checklist">
+            <li>Friendly themes with personality built in</li>
+            <li>Room for your photo, story, and social proof</li>
+            <li>Pages that feel personal, not corporate</li>
+            <li>Works great whether you have 200 or 200K followers</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <h2>Up and running in about a minute</h2>
+          <p>No complicated setup. No steep learning curve. Just a page that does its job beautifully.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <div class="step-num">1</div>
+            <h3>Choose your look</h3>
+            <p>Start with a layout and colors that match your vibe — playful, minimal, bold, or classic.</p>
+          </article>
+          <article class="step">
+            <div class="step-num">2</div>
+            <h3>Add your links</h3>
+            <p>Drop in your top content, products, contact options, and anything else you want people to find first.</p>
+          </article>
+          <article class="step">
+            <div class="step-num">3</div>
+            <h3>Share one URL</h3>
+            <p>Put your 1min.to link anywhere your audience already is. Update it anytime without starting over.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonials" id="stories">
+      <div class="container">
+        <div class="section-header">
+          <h2>Loved by creators who keep it simple</h2>
+          <p>Small pages. Big impact. Here is what people are saying about sharing with 1min.to.</p>
+        </div>
+        <div class="testimonial-grid">
+          <blockquote class="testimonial">
+            <p>“I replaced a messy link list with one clean page. My booking link finally gets clicks instead of getting buried.”</p>
+            <footer class="testimonial-author">
+              <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Leah&amp;backgroundColor=b6e3f4" alt="">
+              <div>
+                <strong>Leah M.</strong>
+                <span>Fitness coach</span>
+              </div>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonial">
+            <p>“Our bakery menu, hours, and online orders live in one place now. Customers stop asking ‘where’s the link?’ every week.”</p>
+            <footer class="testimonial-author">
+              <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Marco&amp;backgroundColor=c0aede" alt="">
+              <div>
+                <strong>Marco &amp; Ana</strong>
+                <span>Local bakery</span>
+              </div>
+            </footer>
+          </blockquote>
+          <blockquote class="testimonial">
+            <p>“It looks way more professional than a spreadsheet of URLs, and I can swap my latest video to the top in seconds.”</p>
+            <footer class="testimonial-author">
+              <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Devon&amp;backgroundColor=ffd5dc" alt="">
+              <div>
+                <strong>Devon K.</strong>
+                <span>Podcaster</span>
+              </div>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container cta-inner">
+        <h2>Your audience is one tap away</h2>
+        <p>1min.to helps you share smarter with a single link that looks great everywhere — social bios, newsletters, business cards, and beyond.</p>
+        <a class="btn" href="#features">Explore features</a>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="logo" href="#top">1min<span>.to</span></a>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#stories">Stories</a>
+      </nav>
+      <p class="footer-copy">© 2026 1min.to. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var nav = document.querySelector('.site-nav');
+      function onScroll() {
+        nav.classList.toggle('scrolled', window.scrollY > 8);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
 </body>
 </html>
