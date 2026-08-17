@@ -8,3 +8,13 @@ getresults
 takethequiz
 seeoptions
 findout
+startquiz
+getmyplan
+beginnow
+joinnow
+trynow
+getgoing
+quizme
+getmatched
+letsgo
+myresults
