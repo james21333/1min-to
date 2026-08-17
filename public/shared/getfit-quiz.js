@@ -17,6 +17,34 @@ const redirect_url = "https://factor75.com";
     const progress = document.getElementById("progress");
     const progressBar = document.getElementById("progressBar");
     const questionScreens = screens.filter((s) => !["analyzing", "summary", "offer", "matching", "found"].includes(s.dataset.screen));
+    const QUIZ_STEPS = {
+      gender: { index: 1, type: "question" },
+      age: { index: 2, type: "question" },
+      goal: { index: 3, type: "question" },
+      bridge: { index: 4, type: "bridge" },
+      amount: { index: 5, type: "question" },
+      tried: { index: 6, type: "question" },
+      stuck: { index: 7, type: "question" },
+      timeline: { index: 8, type: "question" },
+      analyzing: { index: 9, type: "loader" },
+      summary: { index: 10, type: "summary" },
+      offer: { index: 11, type: "offer" },
+      matching: { index: 12, type: "loader" },
+      found: { index: 13, type: "complete" }
+    };
+    const QUIZ_TOTAL_STEPS = 13;
+    let currentScreen = "gender";
+
+    function trackStep(name) {
+      const meta = QUIZ_STEPS[name];
+      if (!meta || !window.oneminAnalytics) return;
+      window.oneminAnalytics.trackQuizStep(name, meta.index, meta.type, QUIZ_TOTAL_STEPS);
+    }
+
+    function activeScreenName() {
+      const active = document.querySelector(".screen.active");
+      return active ? active.dataset.screen : currentScreen;
+    }
     const params = new URLSearchParams(window.location.search);
     const pathOverride = params.get("path");
     const diag = params.get("diag") === "1";
@@ -122,7 +150,9 @@ const redirect_url = "https://factor75.com";
     }
 
     function goTo(name) {
+      currentScreen = name;
       screens.forEach((s) => s.classList.toggle("active", s.dataset.screen === name));
+      trackStep(name);
       const idx = questionScreens.findIndex((s) => s.dataset.screen === name);
       if (idx >= 0) {
         progress.classList.add("on");
@@ -179,6 +209,7 @@ const redirect_url = "https://factor75.com";
     }
 
     function finishMain() {
+      if (window.oneminAnalytics) window.oneminAnalytics.trackQuizComplete("main");
       goTo("found");
       setTimeout(function () {
         window.location.href = redirect_url;
@@ -186,6 +217,7 @@ const redirect_url = "https://factor75.com";
     }
 
     function finishAlt() {
+      if (window.oneminAnalytics) window.oneminAnalytics.trackQuizComplete("alt");
       window.location.href = alt_url;
     }
 
@@ -268,9 +300,24 @@ const redirect_url = "https://factor75.com";
       btn.addEventListener("click", () => nextFrom(btn));
     });
 
-    document.getElementById("skipBtn").addEventListener("click", openOffer);
-    document.getElementById("offerBtn").addEventListener("click", openOffer);
-    document.getElementById("offerSkip").addEventListener("click", openOffer);
+    document.getElementById("skipBtn").addEventListener("click", function () {
+      var step = activeScreenName();
+      var meta = QUIZ_STEPS[step] || { index: 0 };
+      if (window.oneminAnalytics) window.oneminAnalytics.trackQuizSkip(step, meta.index);
+      if (window.oneminAnalytics) window.oneminAnalytics.trackQuizOffer("header_skip");
+      openOffer();
+    });
+    document.getElementById("offerBtn").addEventListener("click", function () {
+      if (window.oneminAnalytics) window.oneminAnalytics.trackQuizOffer("accept");
+      openOffer();
+    });
+    document.getElementById("offerSkip").addEventListener("click", function () {
+      if (window.oneminAnalytics) window.oneminAnalytics.trackQuizOffer("skip");
+      openOffer();
+    });
+
+    if (window.oneminAnalytics) window.oneminAnalytics.trackQuizStart(QUIZ_TOTAL_STEPS);
+    trackStep("gender");
 
     startBackgroundCheck();
 })();
