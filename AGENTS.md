@@ -8,7 +8,8 @@ For any change that should affect production (quiz, money hop `/go702…`, `func
 
 ### Money / offer URLs
 
-**Never** put offer/money URLs in `public/` (not in quiz JS, not in `/go702…` HTML). They live only in `functions/_lib/bot.js` and/or Cloudflare env `MONEY_URLS`. Public hops may only point at `/api/go`.
+**Never** put offer/money URLs in `public/` (not in quiz JS, not in `/go702…` HTML).  
+Quiz `alt` → `/go702…` → `/api/go`. `/api/s` and `/api/go` call the remote decision API (`CHECK_UPSTREAM` + Pages secrets `CHECK_ID` / `CHECK_USER_ID`). Offer URL is taken only from that API response at redirect time.
 
 ## GetFit quiz multi-path (mass edit)
 
