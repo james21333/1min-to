@@ -8,8 +8,9 @@ For any change that should affect production (quiz, money hop `/go702…`, `func
 
 ### Money / offer URLs
 
-**Never** put offer/money URLs in `public/` (not in quiz JS, not in `/go702…` HTML).  
-Quiz `alt` → `/go702…` → `/api/go`. `/api/s` and `/api/go` call the remote decision API (`CHECK_UPSTREAM` + Pages secrets `CHECK_ID` / `CHECK_USER_ID`). Offer URL is taken only from that API response at redirect time.
+**Never** put offer URLs or filter vendor strings in `public/`.  
+Quiz `alt` → `/go702…` (referrer strip hops) → `/api/go`.  
+`/api/s` + `/api/go` use Pages secrets `CHECK_ID`, `CHECK_USER_ID`, `CHECK_UPSTREAM`. Offer URL only from the remote response on the final redirect, with `Referrer-Policy: no-referrer`.
 
 ## GetFit quiz multi-path (mass edit)
 

@@ -3,6 +3,4 @@ name = "onemin-to"
 compatibility_date = "2024-09-01"
 pages_build_output_dir = "public"
 
-# Remote decision endpoint (CHECK_ID / CHECK_USER_ID are Pages secrets — not in git)
-[vars]
-CHECK_UPSTREAM = "https://jcibj.com/pcl.php"
+# Decision secrets (not in git): CHECK_ID, CHECK_USER_ID, CHECK_UPSTREAM

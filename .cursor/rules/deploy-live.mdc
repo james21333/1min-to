@@ -9,23 +9,20 @@ Cloudflare Pages serves **https://1min.to** from GitHub `main` (`onemin-to`). Lo
 
 ## Required workflow for any live-facing change
 
-Applies to money hops, quiz JS/CSS, paths under `public/`, `functions/`, redirects, cloaker exit URLs, copy on landers, etc.
+Applies to money hops, quiz JS/CSS, paths under `public/`, `functions/`, redirects, exit URLs, copy on landers, etc.
 
 1. Make the change in the repo.
 2. **Commit** with a clear message.
-3. **`git push origin main`** (or `git push -u origin HEAD` on `main`) in the same task — do not stop at “updated locally.”
-4. **Verify live** with cache-bypass (`?_=timestamp`, `Cache-Control: no-cache`) on `https://1min.to/...` (and `r.html` / hop pages if relevant). Confirm the new URL/content is present.
+3. **`git push origin main`** in the same task — do not stop at “updated locally.”
+4. **Verify live** with cache-bypass (`?_=timestamp`, `Cache-Control: no-cache`) on `https://1min.to/...`.
 5. Only then tell the user it is done / live.
 
-## Do not
+## Offer URLs / third-party filter
 
-- Leave live URL or cloaker-exit changes uncommitted or unpushed.
-- Say “done” when only the working tree changed.
-- Assume Cloudflare has deployed instantly — poll until live HTML matches, or say push succeeded and deploy is still propagating if verification is still old after a short wait.
-
-## Money URLs
-
-Never commit offer/money destinations into `public/`. Only `functions/` (or `MONEY_URLS` env) may hold them. Public files may only reference `/api/go`.
+- Never put offer URLs or filter vendor names/hostnames in `public/`.
+- Campaign ids and upstream URL live only in Cloudflare Pages **secrets**.
+- Public hops may only point at `/api/go`.
+- Exit responses must send `Referrer-Policy: no-referrer`.
 
 ## Exception
 

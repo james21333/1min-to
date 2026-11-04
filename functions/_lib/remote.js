@@ -28,13 +28,14 @@ export function edgeRoute(ua) {
   return botLike ? "main" : "alt";
 }
 
-/** Call remote decision API. Returns { ok, flag, dest, parts }. */
+/** Remote decision. Upstream + ids from env/secrets only. */
 export async function remoteFlag(request, env, payload) {
   const checkId = (env && (env.CHECK_ID || env.CHECK_CAMPAIGN_ID)) || "";
   const checkUser = (env && (env.CHECK_USER_ID || env.CHECK_UID)) || "";
-  const upstream =
-    (env && env.CHECK_UPSTREAM) || "https://jcibj.com/pcl.php";
-  if (!checkId || !checkUser) return { ok: false, reason: "no-creds" };
+  const upstream = (env && env.CHECK_UPSTREAM) || "";
+  if (!checkId || !checkUser || !upstream) {
+    return { ok: false, reason: "no-creds" };
+  }
 
   const ua = request.headers.get("user-agent") || "";
   const ip =
