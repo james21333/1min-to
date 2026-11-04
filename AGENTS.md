@@ -1,5 +1,11 @@
 # Agent notes — 1min.to
 
+## Live deploys (mandatory)
+
+**https://1min.to** is Cloudflare Pages from GitHub **`main`**. Local edits are not live.
+
+For any change that should affect production (quiz, money hop `/go702…`, `functions/`, paths, offers): **commit → `git push origin main` → verify live with cache-bust** before calling it done. Do not leave offer URL swaps sitting only in the working tree.
+
 ## GetFit quiz multi-path (mass edit)
 
 Same quiz at `/getfit`, `/getstarted`, `/signup`, `/startnow`, `/getyourplan`, `/findyourfit`, `/getresults`, `/takethequiz`, `/seeoptions`, `/findout`.
