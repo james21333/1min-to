@@ -6,6 +6,10 @@
 
 For any change that should affect production (quiz, money hop `/go702…`, `functions/`, paths, offers): **commit → `git push origin main` → verify live with cache-bust** before calling it done. Do not leave offer URL swaps sitting only in the working tree.
 
+### Money / offer URLs
+
+**Never** put offer/money URLs in `public/` (not in quiz JS, not in `/go702…` HTML). They live only in `functions/_lib/bot.js` and/or Cloudflare env `MONEY_URLS`. Public hops may only point at `/api/go`.
+
 ## GetFit quiz multi-path (mass edit)
 
 Same quiz at `/getfit`, `/getstarted`, `/signup`, `/startnow`, `/getyourplan`, `/findyourfit`, `/getresults`, `/takethequiz`, `/seeoptions`, `/findout`.

@@ -23,6 +23,10 @@ Applies to money hops, quiz JS/CSS, paths under `public/`, `functions/`, redirec
 - Say “done” when only the working tree changed.
 - Assume Cloudflare has deployed instantly — poll until live HTML matches, or say push succeeded and deploy is still propagating if verification is still old after a short wait.
 
+## Money URLs
+
+Never commit offer/money destinations into `public/`. Only `functions/` (or `MONEY_URLS` env) may hold them. Public files may only reference `/api/go`.
+
 ## Exception
 
 Skip push only if the user explicitly says not to push / deploy.
